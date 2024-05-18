@@ -10,15 +10,25 @@ contract IImpactManager {
     }
 
     struct Project {
+        uint256 id;
         string name;
         string description;
         uint256 lifetime;
         uint256 starttime;
         uint256 target;
         uint256 collected;
+        uint256 reputation;
         address payable owner;
         Milestone[] milestones;
         bool approved;
+    }
+
+    struct CreateProjectDto {
+        string name;
+        string description;
+        uint256 lifetime;
+        uint256 target;
+        address owner;
     }
 
     event Donated(address indexed donor, uint256 amount);
