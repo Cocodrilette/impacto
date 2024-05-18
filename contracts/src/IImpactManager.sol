@@ -19,7 +19,7 @@ contract IImpactManager {
         uint256 target;
         uint256 collected;
         uint256 currentMilestone;
-        address payable owner;
+        address owner;
         bool approved;
     }
 

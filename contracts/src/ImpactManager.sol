@@ -11,11 +11,16 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
     mapping(uint256 => Milestone[]) public milestonesByProjectId;
     Project[] private projects;
 
-    constructor() ERC20("Impact Token", "IMP", 18) {}
+    constructor() ERC20("Impact Token", "IMP", 18) {
+        // This allows to transfer the fund to the project owner
+        allowance[address(this)][address(this)] = type(uint256).max;
+    }
 
-    function donate() public payable {
-        if (msg.value == 0) revert("Debes donar algo");
-        donations[msg.sender] += msg.value;
+    function donate(uint256 amount) public payable {
+        if (amount == 0) revert("Debes donar algo");
+
+        transfer(address(this), amount);
+        donations[msg.sender] += amount;
 
         emit Donated(msg.sender, msg.value);
     }
@@ -29,7 +34,7 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
             starttime: 0, // this value is set when the project is approved
             target: createProjectDto.target,
             collected: 0,
-            owner: payable(createProjectDto.owner),
+            owner: createProjectDto.owner,
             approved: false,
             currentMilestone: 0
         });
@@ -86,8 +91,7 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         );
 
         project.collected += amount;
-        //@TODO: Transfer ERC20 tokens to the project owner
-        // this.transfer(project.owner, amount);
+        transferFrom(address(this), project.owner, amount);
     }
 
     function getAllocation(
