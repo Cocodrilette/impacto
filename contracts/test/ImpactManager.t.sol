@@ -26,4 +26,20 @@ contract ImpactManagerTest is Test {
         uint256 donation = im.donations(user1);
         assertEq(donation, 100);
     }
+
+    function test_propuse() public {
+        IImpactManager.CreateProjectDto memory dto = IImpactManager
+            .CreateProjectDto({
+                name: "Project 1",
+                description: "Description",
+                lifetime: 100,
+                target: 100,
+                owner: user1
+            });
+
+        im.propose(dto);
+
+        IImpactManager.Project memory project = im.getProjectById(0);
+        assertEq(project.id, 0);
+    }
 }

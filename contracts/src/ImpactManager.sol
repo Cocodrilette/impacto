@@ -7,7 +7,7 @@ import "./token/ERC20.sol";
 
 contract ImpactManager is IImpactManager, Ownable, ERC20 {
     mapping(address => uint256) public donations;
-    mapping(uint256 => Project) public projectById;
+    mapping(uint256 => Project) private projectById;
     mapping(uint256 => Milestone[]) public milestonesByProjectId;
     Project[] private projects;
 
@@ -75,6 +75,12 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
 
     function getProjects() public view returns (Project[] memory) {
         return projects;
+    }
+
+    function getProjectById(
+        uint256 projectId
+    ) public view returns (Project memory) {
+        return projectById[projectId];
     }
 
     function withdrawAllocation(uint256 projectId, uint256 amount) public {
