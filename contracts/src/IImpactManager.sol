@@ -2,10 +2,10 @@
 pragma solidity 0.8.20;
 
 contract IImpactManager {
+    // Weight and compliance should be normal numbers without scalars like 10% = 10
     struct Milestone {
         string name;
         string description;
-        // Weight and compliance should be normal numbers without scalars like 10% = 10
         uint256 weight;
         uint256 compliance;
     }
@@ -18,6 +18,7 @@ contract IImpactManager {
         uint256 starttime;
         uint256 target;
         uint256 collected;
+        uint256 currentMilestone;
         address payable owner;
         bool approved;
     }
@@ -31,4 +32,7 @@ contract IImpactManager {
     }
 
     event Donated(address indexed donor, uint256 amount);
+    event ProjectProposed(uint256 indexed projectId);
+    event ProjectApproved(uint256 indexed projectId);
+    event MilestoneApproved(uint256 indexed projectId, uint256 compliance);
 }
