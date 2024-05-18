@@ -6,6 +6,7 @@ import "./IImpactManager.sol";
 contract ImpactManager is IImpactManager {
     mapping(address => uint256) public donations;
     mapping(uint256 => Project) public projectById;
+    mapping(uint256 => Milestone[]) public milestonesByProjectId;
     Project[] private projects;
 
     function donate() public payable {
@@ -26,12 +27,16 @@ contract ImpactManager is IImpactManager {
             collected: 0,
             reputation: 1,
             owner: payable(createProjectDto.owner),
-            milestones: _defaultMilestones(),
             approved: false
         });
 
+        Milestone[] memory milestones = _defaultMilestones();
+
         projects.push(project);
         projectById[project.id] = project;
+        milestonesByProjectId[project.id].push(milestones[0]);
+        milestonesByProjectId[project.id].push(milestones[1]);
+        milestonesByProjectId[project.id].push(milestones[2]);
     }
 
     function getProjects() public view returns (Project[] memory) {

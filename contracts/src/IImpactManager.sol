@@ -19,7 +19,6 @@ contract IImpactManager {
         uint256 collected;
         uint256 reputation;
         address payable owner;
-        Milestone[] milestones;
         bool approved;
     }
 
