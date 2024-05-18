@@ -10,6 +10,7 @@ contract ImpactManager is IImpactManager, Ownable {
     mapping(uint256 => Milestone[]) public milestonesByProjectId;
     Project[] private projects;
 
+
     function donate() public payable {
         if (msg.value == 0) revert("Debes donar algo");
         donations[msg.sender] += msg.value;
@@ -78,12 +79,21 @@ contract ImpactManager is IImpactManager, Ownable {
         Project storage project = projectById[projectId];
         Milestones[] storage milestones = milestonesByProjectId[projectId];
         Milestone storage milestone = milestones[n - 1];
-        uint256 T1 = project.target * milestone.weight / 100;
+        uint256 T1 = (project.target * milestone.weight) / 100;
         if(n == 1) return T1;
-        uint256 _reputationIndex;
+        uint256 _reputationIndex = 0;
         for (uint256 i = 0; i < n - 1; i++) {
-            _reputationIndex += milestones[i].weight;
+            _reputationIndex += milestones[i].weight * milestones[i].compliance;
         }
-        return T1 * _reputationIndex / 100;
+        return T1 + (_reputationIndex  * (project.target - T1)) / 100;
+    }
+
+    function _getAllocation(uint256 _projectId, uint256 n) internal view returns (uint256){
+        Project storage project = projectById[projectId];
+        uint256 I = milestonesByProjectId[projectId].length
+        uint256 t = block.timestamp - project.starttime;
+        uint256 Pk = project.lifetime / I * (n-1);
+        uint256 Pn = project.lifetime / I * n;
+       return _getLinearReputationBasedAllocation(n - 1, _projectId) + ((t-Pk) / Pn) * (_getLinearReputationBasedAllocation(n, _projectId) - _getLinearReputationBasedAllocation(n - 1, _projectId));
     }
 }

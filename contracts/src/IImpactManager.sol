@@ -5,6 +5,7 @@ contract IImpactManager {
     struct Milestone {
         string name;
         string description;
+        // Weight and compliance should be normal numbers without scalars like 10% = 10
         uint256 weight;
         uint256 compliance;
     }
