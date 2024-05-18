@@ -13,11 +13,11 @@ network="$1"
 function deploy_local() {
     # set balance to 100eth
     cast rpc anvil_setBalance $PUBLIC_KEY 0x56BC75E2D63100000 
-    # forge script script/EnergyToken.s.sol:EnergyTokenScript --broadcast --rpc-url http://localhost:8545
+    forge script script/ImpactManager.s.sol:ImpactManagerScript --broadcast --rpc-url http://localhost:8545
 }
 
 function deploy_testnet() {
-    # forge script script/EnergyToken.s.sol:EnergyTokenScript --rpc-url $AVALANCHE_RPC_URL --broadcast --verify -vvvv
+    forge script script/ImpactManager.s.sol:ImpactManagerScript --rpc-url $AVALANCHE_RPC_URL --broadcast --verify -vvvv
 }
 
 case "$network" in "local")
