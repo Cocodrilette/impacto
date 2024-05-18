@@ -111,6 +111,10 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
                 _getLinearReputationBasedAllocation(n - 1, _projectId));
     }
 
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
     function _defaultMilestones() private pure returns (Milestone[] memory) {
         Milestone[] memory milestones = new Milestone[](3);
         milestones[0] = Milestone({

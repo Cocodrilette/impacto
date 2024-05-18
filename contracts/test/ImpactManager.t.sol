@@ -2,10 +2,10 @@
 pragma solidity 0.8.20;
 
 import "../lib/forge-std/src/Test.sol";
-import "../harness/Harness.sol";
+import "../src/ImpactManager.sol";
 
 contract ImpactManagerTest is Test {
-    Harness public harness;
+    ImpactManager im;
 
     address public user1 = address(1);
     address public user2 = address(2);
@@ -13,8 +13,17 @@ contract ImpactManagerTest is Test {
     address public user4 = address(4);
     address public user5 = address(5);
 
-    function setup() public {
-        ImpactManager im = new ImpactManager();
-        harness = new Harness(im);
+    function setUp() public {
+        im = new ImpactManager();
+    }
+
+    function test_donate() public {
+        im.mint(user1, 100);
+
+        vm.prank(user1);
+        im.donate(100);
+
+        uint256 donation = im.donations(user1);
+        assertEq(donation, 100);
     }
 }
