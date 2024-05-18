@@ -3,12 +3,15 @@ pragma solidity 0.8.20;
 
 import "./IImpactManager.sol";
 import "./Access/Ownable.sol";
+import "./token/ERC20.sol";
 
-contract ImpactManager is IImpactManager, Ownable {
+contract ImpactManager is IImpactManager, Ownable, ERC20 {
     mapping(address => uint256) public donations;
     mapping(uint256 => Project) public projectById;
     mapping(uint256 => Milestone[]) public milestonesByProjectId;
     Project[] private projects;
+
+    constructor() ERC20("Impact Token", "IMP", 18) {}
 
     function donate() public payable {
         if (msg.value == 0) revert("Debes donar algo");
