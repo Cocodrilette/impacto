@@ -50,6 +50,28 @@ contract ImpactManager is IImpactManager, Ownable {
         return projects;
     }
 
+    function withdrawAllocation(uint256 projectId, uint256 amount){
+        Project storage project = projectById[projectId];
+        require(project.approved, "The project is not approved yet");
+        require(project.owner == msg.sender, "You are not the owner of the project");
+        uint256 allocation = getAllocation(projectId, project.currentMilestone);
+        require(amount <= (allocation - collected), "The amount is higher than the allocation");
+        project.collected += amount;
+        //@TODO: Transfer ERC20 tokens to the project owner
+        this.transfer(project.owner, amount);
+
+    }
+
+    function getAllocation(uint256 _projectId, uint256 n) public view returns (uint256){
+        if(n == 0) return 0;
+        Project storage project = projectById[projectId];
+        uint256 I = milestonesByProjectId[projectId].length
+        uint256 t = block.timestamp - project.starttime;
+        uint256 Pk = project.lifetime / I * (n-1);
+        uint256 Pn = project.lifetime / I * n;
+       return _getLinearReputationBasedAllocation(n - 1, _projectId) + ((t-Pk) / Pn) * (_getLinearReputationBasedAllocation(n, _projectId) - _getLinearReputationBasedAllocation(n - 1, _projectId));
+    }
+
     function _defaultMilestones() private pure returns (Milestone[] memory) {
         Milestone[] memory milestones = new Milestone[](3);
         milestones[0] = Milestone({
@@ -89,12 +111,5 @@ contract ImpactManager is IImpactManager, Ownable {
         return T1 + (_reputationIndex  * (project.target - T1)) / 100;
     }
 
-    function getAllocation(uint256 _projectId, uint256 n) public view returns (uint256){
-        Project storage project = projectById[projectId];
-        uint256 I = milestonesByProjectId[projectId].length
-        uint256 t = block.timestamp - project.starttime;
-        uint256 Pk = project.lifetime / I * (n-1);
-        uint256 Pn = project.lifetime / I * n;
-       return _getLinearReputationBasedAllocation(n - 1, _projectId) + ((t-Pk) / Pn) * (_getLinearReputationBasedAllocation(n, _projectId) - _getLinearReputationBasedAllocation(n - 1, _projectId));
-    }
+    
 }
