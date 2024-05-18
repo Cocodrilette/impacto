@@ -56,19 +56,20 @@ contract ImpactManager is IImpactManager, Ownable {
             name: "Validacion inicial",
             description: "El proyecto demuestra ser viable y las personas involucradas tienen la capacidad de llevarlo a cabo.",
             weight: 10,
-            compliance: 0
+            // Compliance should be 100 as default
+            compliance: 100
         });
         milestones[1] = Milestone({
             name: "Medicion de impacto",
             description: "Se establecen los indicadores de impacto y el proyecto ha demostrado avances en su cumplimiento.",
             weight: 20,
-            compliance: 0
+            compliance: 100
         });
         milestones[2] = Milestone({
             name: "Impacto social final",
             description: "El proyecto ha sido completado y se han medido los indicadores de impacto. El proyecto cumplio con los objetivos planteados.",
             weight: 70,
-            compliance: 0
+            compliance: 100
         });
 
         return milestones;
@@ -88,7 +89,7 @@ contract ImpactManager is IImpactManager, Ownable {
         return T1 + (_reputationIndex  * (project.target - T1)) / 100;
     }
 
-    function _getAllocation(uint256 _projectId, uint256 n) internal view returns (uint256){
+    function getAllocation(uint256 _projectId, uint256 n) public view returns (uint256){
         Project storage project = projectById[projectId];
         uint256 I = milestonesByProjectId[projectId].length
         uint256 t = block.timestamp - project.starttime;
