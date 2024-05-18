@@ -2,8 +2,9 @@
 pragma solidity 0.8.20;
 
 import "./IImpactManager.sol";
+import "./Access/Ownable.sol";
 
-contract ImpactManager is IImpactManager {
+contract ImpactManager is IImpactManager, Ownable {
     mapping(address => uint256) public donations;
     mapping(uint256 => Project) public projectById;
     mapping(uint256 => Milestone[]) public milestonesByProjectId;
@@ -37,6 +38,12 @@ contract ImpactManager is IImpactManager {
         milestonesByProjectId[project.id].push(milestones[0]);
         milestonesByProjectId[project.id].push(milestones[1]);
         milestonesByProjectId[project.id].push(milestones[2]);
+    }
+
+    function approve(uint256 projectId) public onlyOwner {
+        Project storage project = projectById[projectId];
+        project.approved = true;
+        project.starttime = block.timestamp;
     }
 
     function getProjects() public view returns (Project[] memory) {
