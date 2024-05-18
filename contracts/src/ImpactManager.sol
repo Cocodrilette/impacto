@@ -83,6 +83,19 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         return projectById[projectId];
     }
 
+    function getMilestonesByProjectId(
+        uint256 projectId
+    ) public view returns (Milestone[] memory) {
+        return milestonesByProjectId[projectId];
+    }
+
+    function getMilestoneByProjectId(
+        uint256 projectId,
+        uint256 milestoneId
+    ) public view returns (Milestone memory) {
+        return milestonesByProjectId[projectId][milestoneId];
+    }
+
     function withdrawAllocation(uint256 projectId, uint256 amount) public {
         Project storage project = projectById[projectId];
         require(project.approved, "The project is not approved yet");
