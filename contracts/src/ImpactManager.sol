@@ -72,4 +72,18 @@ contract ImpactManager is IImpactManager, Ownable {
 
         return milestones;
     }
+    
+    function _getLinearReputationBasedAllocation(uint256 n, uint256 _projectId) internal view returns (uint256) {
+        if(n == 0) return 0;
+        Project storage project = projectById[projectId];
+        Milestones[] storage milestones = milestonesByProjectId[projectId];
+        Milestone storage milestone = milestones[n - 1];
+        uint256 T1 = project.target * milestone.weight / 100;
+        if(n == 1) return T1;
+        uint256 _reputationIndex;
+        for (uint256 i = 0; i < n - 1; i++) {
+            _reputationIndex += milestones[i].weight;
+        }
+        return T1 * _reputationIndex / 100;
+    }
 }
