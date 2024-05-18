@@ -6,7 +6,7 @@ contract IImpactManager {
         string name;
         string description;
         uint256 weight;
-        bool completed;
+        uint256 compliance;
     }
 
     struct Project {
@@ -17,7 +17,6 @@ contract IImpactManager {
         uint256 starttime;
         uint256 target;
         uint256 collected;
-        uint256 reputation;
         address payable owner;
         bool approved;
     }

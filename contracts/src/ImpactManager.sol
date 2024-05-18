@@ -26,7 +26,6 @@ contract ImpactManager is IImpactManager, Ownable {
             starttime: 0, // this value is set when the project is approved
             target: createProjectDto.target,
             collected: 0,
-            reputation: 1,
             owner: payable(createProjectDto.owner),
             approved: false
         });
@@ -56,19 +55,19 @@ contract ImpactManager is IImpactManager, Ownable {
             name: "Validacion inicial",
             description: "El proyecto demuestra ser viable y las personas involucradas tienen la capacidad de llevarlo a cabo.",
             weight: 10,
-            completed: false
+            compliance: 0
         });
         milestones[1] = Milestone({
             name: "Medicion de impacto",
             description: "Se establecen los indicadores de impacto y el proyecto ha demostrado avances en su cumplimiento.",
             weight: 20,
-            completed: false
+            compliance: 0
         });
         milestones[2] = Milestone({
             name: "Impacto social final",
             description: "El proyecto ha sido completado y se han medido los indicadores de impacto. El proyecto cumplio con los objetivos planteados.",
             weight: 70,
-            completed: false
+            compliance: 0
         });
 
         return milestones;
