@@ -2,35 +2,35 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { ReactNode } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { foundry, hardhat, polygonAmoy } from "wagmi/chains";
+import { foundry, hardhat, avalancheFuji } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { AppConfig } from "../config";
 
-const customSepolia = {
-  ...polygonAmoy,
+const customFuji = {
+  ...avalancheFuji,
   rpcUrls: {
     default: {
       http: [AppConfig.rpcUrl],
     },
   },
-} as typeof polygonAmoy;
+} as typeof avalancheFuji;
 
 const config = getDefaultConfig({
   appName: "App",
   projectId: AppConfig.walletConnectProjectId,
-  chains: AppConfig.enableTestnets ? [polygonAmoy] : [hardhat],
+  chains: AppConfig.enableTestnets ? [avalancheFuji] : [hardhat],
   ssr: true,
 });
 
 export const client = new QueryClient();
 
-export const chain = AppConfig.enableTestnets ? polygonAmoy : hardhat;
+export const chain = AppConfig.enableTestnets ? avalancheFuji : hardhat;
 export const clientConfig = createConfig({
-  chains: AppConfig.enableTestnets ? [customSepolia] : [hardhat],
+  chains: AppConfig.enableTestnets ? [customFuji] : [hardhat],
   transports: {
     [foundry.id]: http("http://localhost:8545"),
-    [polygonAmoy.id]: http(AppConfig.rpcUrl),
+    [avalancheFuji.id]: http(AppConfig.rpcUrl),
   },
 });
 
