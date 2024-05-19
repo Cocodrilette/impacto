@@ -11,6 +11,9 @@ contract ImpactManagerScript is Script {
 
         ImpactManager im = new ImpactManager();
 
+        im.mint(address(this), 1000000 ether);
+        im.donate(100000 ether);
+
         IImpactManager.CreateProjectDto memory p1 = IImpactManager
             .CreateProjectDto({
                 name: "Reforestacion de arboles en Bogota",
@@ -20,28 +23,10 @@ contract ImpactManagerScript is Script {
                 owner: msg.sender,
                 imageUrl: "https://vhqpfhyaynbpkhkwuuwo.supabase.co/storage/v1/object/public/impacto/trees.webp"
             });
-        IImpactManager.CreateProjectDto memory p2 = IImpactManager
-            .CreateProjectDto({
-                name: "Re ubicacion de los hipopotamos en Colombia",
-                description: "Somos un proyecto con el objetivo de reubicar los hipopotamos que habitan en el rio Magdalena",
-                lifetime: 360 days,
-                target: 22000 ether,
-                owner: msg.sender,
-                imageUrl: "https://vhqpfhyaynbpkhkwuuwo.supabase.co/storage/v1/object/public/impacto/hipos.webp"
-            });
-        IImpactManager.CreateProjectDto memory p3 = IImpactManager
-            .CreateProjectDto({
-                name: "Conservacion de truchas en el Huila",
-                description: "Somos un proyecto de DeSci que se enfoca en la investigacion de parasitos en las truchas del Huila.",
-                lifetime: 90 days,
-                target: 7000 ether,
-                owner: msg.sender,
-                imageUrl: "https://vhqpfhyaynbpkhkwuuwo.supabase.co/storage/v1/object/public/impacto/truchas.webp"
-            });
 
         im.propose(p1);
-        im.propose(p2);
-        im.propose(p3);
+        im.approveProject(0);
+        im.approveMilestone(0, 50);
 
         vm.stopBroadcast();
     }
