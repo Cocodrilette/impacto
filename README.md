@@ -41,6 +41,12 @@
             <b>Poco financiamiento para proyectos:</b> Finalmente, creación de un protocolo que otorgue espacio para la financianción de proyectos en etapa temprana que nutran la variedad de comunidades y proyectos dentro del ecosistema de Avalanche, abriendo la posibilidad de financiar bienes públicos. Quitando la dependencia de búsqueda de capital en Ava Labs y VCs.
         </li>
     </ol>
+    <img src="./front/public/avalabs-founding.jpeg">
+    <p>
+        Estos fueron los proyectos financiados por AvaLabs en la última ronda de fondeo.
+    </p>
+    <img src="./front/public/gitcoin-fonding.jpeg">
+    <p>Versus la cantidad de proyectos que fueron financiados en Gitcoin la última ronda.</p>
     <img src="./front/public/what-is-impacto.png">
     <p>Impacto plantea estas soluciones para permitir un financiamiento más justo, amplio y estratégico a las propuestas de los proyectos o comunidades.</p>
 </div>
