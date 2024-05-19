@@ -12,6 +12,9 @@
         </li><br>
         <li>
             <b>Nivelación de las votaciones:</b> El peso de los votos durante las rondas de votación, en ocasiones no es justo, ya sea porque otra persona tiene más dinero y puede comprar más tokens para votar, o porque simplemente, cualquier persona tiene el mismo peso de voto, tu voto vale un punto ya sea que eres nuevo en la comunidad o council/miembro. ¡Se vuelve muy desequilibrado!
+        </li><br>
+        <li>
+            <b>Poco financiamiento para proyectos:</b> Poco crecimiento del ecosistema:</b> El que los proyectos dependan de capital otorgado por Ava Labs o por VCs límita mucho la creación de un ecosistema basto y diverso como con el que cuentan otras blockchains, reduciendo las comunidades y los network effects.
         </li>
     </ol>
     <p><b>Algunas plataformas muy famosas que luchan contra estas problemáticas son:</b></p>
@@ -58,3 +61,7 @@
     </ol>
     <img src="./front/public/criterios-de-evaluacion.png">
 </div>
+<h2>Modelo de negocio</h2>
+<img src="./front/public/bussiness-model.png">
+<h2>Roadmap</h2>
+<img src="./front/public/roadmap.png">
