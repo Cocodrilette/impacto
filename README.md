@@ -1,2 +1,3 @@
-<h1>Impacto app <img src="./front/public/impacto-logo.png" height="60" /></h1>
-<p>Impacto app es una plataforma que permite el financiamiento y apoyo a proyectos de bien público. <i>Somos la solución definitiva a Gitcoin</i>.</p>
+<h1 align="center">Impacto app <img src="./front/public/impacto-logo.png" height="60" /></h1>
+<p>Impacto app es una plataforma que permite el financiamiento y apoyo a proyectos de bien público. <i>Somos la solución definitiva a Gitcoin</i>. Impacto brinda una forma más robusta de selección de los proyectos que son presentados ante un fórum, comunidad o DAO.</p>
+<h2>Problemas actuales en las gobernanzas</h2>
