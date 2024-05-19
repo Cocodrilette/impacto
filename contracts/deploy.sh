@@ -13,7 +13,7 @@ network="$1"
 function deploy_local() {
     # set balance to 100eth
     cast rpc anvil_setBalance $PUBLIC_KEY 0x56BC75E2D63100000 
-    forge script script/ImpactManager.s.sol:ImpactManagerScript --broadcast --rpc-url http://localhost:8545
+    forge script script/ImpactManager.s.sol:ImpactManagerScript --rpc-url $PRIVATE_SERVER_RPC --broadcast  # http://localhost:8545
 }
 
 function deploy_testnet() {

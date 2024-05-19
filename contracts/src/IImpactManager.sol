@@ -21,6 +21,7 @@ contract IImpactManager {
         uint256 currentMilestone;
         address owner;
         bool approved;
+        string imageUrl;
     }
 
     struct CreateProjectDto {
@@ -29,6 +30,7 @@ contract IImpactManager {
         uint256 lifetime;
         uint256 target;
         address owner;
+        string imageUrl;
     }
 
     event Donated(address indexed donor, uint256 amount);

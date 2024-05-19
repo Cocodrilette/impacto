@@ -33,7 +33,8 @@ contract ImpactManagerTest is Test {
                 description: "Description",
                 lifetime: 100,
                 target: 100,
-                owner: user1
+                owner: user1,
+                imageUrl: ""
             });
 
         im.propose(dto);
@@ -53,7 +54,8 @@ contract ImpactManagerTest is Test {
                 description: "Description",
                 lifetime: 100,
                 target: 100,
-                owner: user1
+                owner: user1,
+                imageUrl: ""
             });
 
         im.propose(dto);
@@ -80,7 +82,8 @@ contract ImpactManagerTest is Test {
                 description: "Description",
                 lifetime: 100,
                 target: 100,
-                owner: user1
+                owner: user1,
+                imageUrl: ""
             });
 
         im.propose(dto);
@@ -108,7 +111,8 @@ contract ImpactManagerTest is Test {
                 description: "Description",
                 lifetime: block.timestamp + 1 days * 30 * 6,
                 target: 100 ether,
-                owner: user1
+                owner: user1,
+                imageUrl: ""
             });
 
         im.propose(dto);
@@ -117,8 +121,6 @@ contract ImpactManagerTest is Test {
 
         vm.prank(owner);
         im.approveProject(PROJECT_ID);
-
-        
 
         vm.warp(block.timestamp + 1 days * 30 * 1);
         uint256 allocation = im.getAllocation(PROJECT_ID, 1);
@@ -132,15 +134,13 @@ contract ImpactManagerTest is Test {
         vm.warp(block.timestamp + 1 days * 30 * 2);
         allocation = im.getAllocation(PROJECT_ID, 2);
         assert(allocation == 37e18);
-         vm.prank(owner);
+        vm.prank(owner);
         im.approveMilestone(PROJECT_ID, 100);
         vm.warp(block.timestamp + 1 days * 30 * 2);
         allocation = im.getAllocation(PROJECT_ID, 3);
         assert(allocation == 100e18);
-
-
-
     }
+
     function __mint__(address to, uint256 amount) public {
         vm.prank(owner);
         im.mint(to, amount);

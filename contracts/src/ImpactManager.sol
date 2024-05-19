@@ -37,7 +37,8 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
             collected: 0,
             owner: createProjectDto.owner,
             approved: false,
-            currentMilestone: 0
+            currentMilestone: 0,
+            imageUrl: createProjectDto.imageUrl
         });
 
         Milestone[] memory milestones = _defaultMilestones();
@@ -115,16 +116,16 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         Project storage project = projectById[_projectId];
 
         uint256 I = milestonesByProjectId[_projectId].length;
-        uint256 t = (block.timestamp - project.starttime );
+        uint256 t = (block.timestamp - project.starttime);
         uint256 Pk = ((project.lifetime / I) * (n - 1));
-        uint256 Pn = ((project.lifetime / I) * n ) -Pk;
+        uint256 Pn = ((project.lifetime / I) * n) - Pk;
         uint256 SCALAR = 1e18;
         uint256 numerator = (t - Pk) * SCALAR;
         uint256 denominator = Pn;
 
         uint256 scaledValue = numerator / denominator;
         return
-             _getLinearReputationBasedAllocation(n - 1, _projectId) +
+            _getLinearReputationBasedAllocation(n - 1, _projectId) +
             (scaledValue *
                 (_getLinearReputationBasedAllocation(n, _projectId) -
                     _getLinearReputationBasedAllocation(n - 1, _projectId))) /
@@ -165,7 +166,7 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
             "Compliance must be between 0 and 100"
         );
         Project storage project = projectById[projectId];
-        console2.log("Current milestone ",project.currentMilestone);
+        console2.log("Current milestone ", project.currentMilestone);
         Milestone storage milestone = milestonesByProjectId[projectId][
             project.currentMilestone
         ];
@@ -189,9 +190,9 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
 
         uint256 _reputationIndex = 0;
 
-        for (uint256 i = 0; i <= n - 1 ; i++) {
+        for (uint256 i = 0; i <= n - 1; i++) {
             _reputationIndex += milestones[i].weight * milestones[i].compliance;
         }
-        return T1 + (_reputationIndex/100 * (project.target - T1)) / 100;
+        return T1 + ((_reputationIndex / 100) * (project.target - T1)) / 100;
     }
 }
