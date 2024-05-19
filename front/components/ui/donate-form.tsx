@@ -1,21 +1,24 @@
-"use client";
+'use client';
 
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
-import { Card } from "./card";
-import { usePrivy } from "@privy-io/react-auth";
-import { abi } from "@/constants/abi/impact-manager";
-import { ImpactManagerAddress } from "@/constants";
-import { formatEther, parseUnits } from "viem";
-import { useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { useAccount, useReadContract, useWriteContract } from 'wagmi';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './card';
+import { usePrivy } from '@privy-io/react-auth';
+import { abi } from '@/constants/abi/impact-manager';
+import { ImpactManagerAddress } from '@/constants';
+import { formatEther, parseUnits } from 'viem';
+import { useEffect } from 'react';
+import { useToast } from './use-toast';
+import { Button } from './button';
+import { Input } from './input';
 
 export function DonateForm() {
   const { address } = useAccount();
   const { connectWallet } = usePrivy();
+  const { toast } = useToast();
   const { data, refetch, error, isFetched } = useReadContract({
     abi: abi,
     address: ImpactManagerAddress,
-    functionName: "balanceOf",
+    functionName: 'balanceOf',
     args: [address],
   });
   const { writeContract, isError, isSuccess } = useWriteContract();
@@ -28,71 +31,73 @@ export function DonateForm() {
   }, [data]);
 
   function handleDonate() {
-    const { value } = document.getElementById("amount") as HTMLInputElement;
+    const { value } = document.getElementById('amount') as HTMLInputElement;
     if (!value || parseInt(value) === 0) {
-      toast.error("Amount is required");
+      toast({ title: 'Amount is required' });
       return;
     }
 
-    const currentBalance = typeof data === "bigint" ? data : 0;
+    const currentBalance = typeof data === 'bigint' ? data : 0;
     const valueBN = parseUnits(value, 18);
 
     if (valueBN > currentBalance) {
-      toast.error("Insufficient balance");
+      toast({ title: 'Insufficient balance' });
       return;
     }
 
     writeContract({
       abi: abi,
       address: ImpactManagerAddress,
-      functionName: "donate",
+      functionName: 'donate',
       args: [valueBN],
     });
   }
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(
-        "Donation successful. Wait for the transaction to confirm."
-      );
+      toast({
+        title: 'Donation successful. Wait for the transaction to confirm.',
+      });
       refetch();
     }
     if (isError) {
-      toast.error("Donation failed");
+      toast({ title: 'Donation failed' });
     }
   }, [isSuccess, isError]);
 
   return (
-    <Card className="flex flex-col gap-2 p-2 max-w-sm">
-      <Toaster />
-      <div>
-        <label htmlFor="amount" className="text-sm font-medium">
-          Amount
-        </label>
-        <input
+    <Card className='donate w-full'>
+      <CardHeader>
+        <CardTitle>
+          Donate
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Input
           disabled={!address}
-          id="amount"
-          type="number"
-          className="w-full p-2 border rounded-md"
+          id='amount'
+          className='w-full'
         />
-        <p className="text-xs text-gray-400 mt-1">
+        <p className='text-xs text-gray-400 mt-1'>
           {data
-            ? `Available: ${typeof data === "bigint" ? formatEther(data) : "0"}`
-            : "Loading..."}
+            ? `Available: ${typeof data === 'bigint' ? formatEther(data) : '0'}`
+            : 'Loading...'}
         </p>
-      </div>
-      <button
-        onClick={() => {
-          if (address) {
-            handleDonate();
-          } else {
-            connectWallet();
-          }
-        }}
-        className="w-full p-2 bg-primary text-white rounded-md"
-      >
-        {address ? "Donate" : "Connect Wallet"}
-      </button>
+      </CardContent>
+      <CardFooter>
+        <Button
+        className='w-full font-bold'
+          onClick={() => {
+            if (address) {
+              handleDonate();
+            } else {
+              connectWallet();
+            }
+          }}
+        >
+          {address ? 'Donate' : 'Connect Wallet'}
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

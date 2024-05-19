@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 import { Project } from "./project";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 export function Projects() {
   const settings = {
@@ -14,9 +14,6 @@ export function Projects() {
   };
 
   return (
-    <div className="flex flex-col items-left justify-center mt-10 p-2 gap-5 mb-20">
-      <h1 className="text-xl font-semibold">Proyectos</h1>
-      <div className="flex flex-col items-center justify-center w-full">
         <Slider className="max-w-xl" {...settings}>
           <Project
             title="Reforestación de árboles en Bogotá"
@@ -38,9 +35,7 @@ export function Projects() {
             requiredFunds={3500}
             collectedFunds={3000}
             imageUrl="https://vhqpfhyaynbpkhkwuuwo.supabase.co/storage/v1/object/public/impacto/truchas.webp"
-          />
+          /> 
         </Slider>
-      </div>
-    </div>
   );
 }
