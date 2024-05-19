@@ -1,33 +1,35 @@
-'use client';
+"use client";
 
-import { PrivyProvider } from '@privy-io/react-auth';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createConfig } from '@privy-io/wagmi';
-import { avalancheFuji } from 'viem/chains';
-import { WagmiProvider } from '@privy-io/wagmi';
-import { http } from 'wagmi';
+import { PrivyProvider } from "@privy-io/react-auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createConfig } from "@privy-io/wagmi";
+import { avalancheFuji, foundry } from "viem/chains";
+import { WagmiProvider } from "@privy-io/wagmi";
+import { http } from "wagmi";
+import { EnableTestnet } from "@/constants";
 
 export const config = createConfig({
-  chains: [avalancheFuji], // Pass your required chains as an array
+  chains: EnableTestnet ? [avalancheFuji] : [foundry], // Pass your required chains as an array
   transports: {
     [avalancheFuji.id]: http(),
+    [foundry.id]: http("http://localhost:8545"),
   },
 });
 export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
   return (
     <PrivyProvider
-      appId='clwcrd9zx01ihbie8ucpa5dhc'
+      appId="clwcrd9zx01ihbie8ucpa5dhc"
       config={{
         // Customize Privy's appearance in your app
         appearance: {
-          theme: 'light',
-          accentColor: '#676FFF',
-          logo: 'https://your-logo-url',
+          theme: "light",
+          accentColor: "#676FFF",
+          logo: "https://your-logo-url",
         },
         // Create embedded wallets for users who don't have a wallet
         embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
+          createOnLogin: "users-without-wallets",
         },
       }}
     >
