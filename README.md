@@ -68,6 +68,27 @@
 <img src="./front/public/bussiness-model.png">
 <h2>Roadmap</h2>
 <img src="./front/public/roadmap.png">
+<h2>Math foundation</h2>
+
+### Fórmula de Reputación lineal $\ S(n) $
+
+$$\( S(n) = T_1 + \left( \sum_{k=1}^{n} A_k \cdot C_k \right) \times (T - T_1) \)
+$$
+Donde:
+- $`\ T `$ es el total de tokens.
+- $`\ T_1 `$ es el 10% del total de tokens $\( T_1 = 0.1 \times T \))$.
+- $`\ A_k `$ es el peso del hito $\ k $.
+- $`\ C_k `$ es el cumplimiento del hito $\ k $.
+
+### Fórmula de Asignación basada en tiempo y reputacion lineal \( A(t, n) \)
+
+
+$$\[ A(t, n) = S(n-1) + \left( \frac{t - t_{\text{prev}}}{P_n} \right) \times (S(n) - S(n-1)) \]
+$$
+
+Donde:
+- $`\ t_{\text{prev}} =  \sum_{k=1}^{n-1} P_k \ `$ es el tiempo total hasta el final del periodo anterior.
+- $`\ P_n `$ es la duración del periodo $`\ n `$.
 <h2>Despliegue de la subnet impactNetwork</h2>
 
 ```bash:
