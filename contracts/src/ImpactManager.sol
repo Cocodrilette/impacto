@@ -4,6 +4,7 @@ pragma solidity 0.8.20;
 import "./IImpactManager.sol";
 import "./Access/Ownable.sol";
 import "./token/ERC20.sol";
+import "../lib/forge-std/src/console2.sol";
 
 contract ImpactManager is IImpactManager, Ownable, ERC20 {
     mapping(address => uint256) public donations;
@@ -112,10 +113,17 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
     ) public view returns (uint256) {
         if (n == 0) return 0;
         Project storage project = projectById[_projectId];
+
         uint256 I = milestonesByProjectId[_projectId].length;
         uint256 t = block.timestamp - project.starttime;
         uint256 Pk = (project.lifetime / I) * (n - 1);
         uint256 Pn = (project.lifetime / I) * n;
+
+        console2.log("I", I);
+        console2.log("t", t);
+        console2.log("Pk", Pk);
+        console2.log("Pn", Pn);
+
         return
             _getLinearReputationBasedAllocation(n - 1, _projectId) +
             ((t - Pk) / Pn) *

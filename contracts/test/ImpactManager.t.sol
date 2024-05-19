@@ -101,6 +101,31 @@ contract ImpactManagerTest is Test {
         assertEq(milestones[1].compliance, 100);
     }
 
+    function test_getAllocation() public {
+        IImpactManager.CreateProjectDto memory dto = IImpactManager
+            .CreateProjectDto({
+                name: "Project 1",
+                description: "Description",
+                lifetime: block.timestamp + 1 days * 30 * 6,
+                target: 100 ether,
+                owner: user1
+            });
+
+        im.propose(dto);
+
+        uint256 PROJECT_ID = 0;
+
+        vm.prank(owner);
+        im.approveProject(PROJECT_ID);
+
+        vm.prank(owner);
+        im.approveMilestone(PROJECT_ID, 100);
+
+        vm.warp(block.timestamp + 1 days * 30 * 2);
+        uint256 allocation = im.getAllocation(PROJECT_ID, 1);
+        assertEq(allocation, 30 ether);
+    }
+
     function __mint__(address to, uint256 amount) public {
         vm.prank(owner);
         im.mint(to, amount);
