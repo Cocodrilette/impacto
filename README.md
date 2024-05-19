@@ -78,7 +78,7 @@
 
 ### Fórmula de Reputación lineal $\ S(n) $
 
-$$\( S(n) = T_1 + \left( \sum_{k=1}^{n} A_k \cdot C_k \right) \times (T - T_1) \)
+$$\ S(n) = T_1 + \left( \sum_{k=1}^{n} A_k \cdot C_k \right) \times (T - T_1) 
 $$
 Donde:
 - $`\ T `$ es el total de tokens.
@@ -89,7 +89,7 @@ Donde:
 ### Fórmula de Asignación basada en tiempo y reputacion lineal \( A(t, n) \)
 
 
-$$\[ A(t, n) = S(n-1) + \left( \frac{t - t_{\text{prev}}}{P_n} \right) \times (S(n) - S(n-1)) \]
+$$ A(t, n) = S(n-1) + \left( \frac{t - t_{\text{prev}}}{P_n} \right) \times (S(n) - S(n-1)) 
 $$
 
 Donde:
