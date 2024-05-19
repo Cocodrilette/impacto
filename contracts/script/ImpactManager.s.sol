@@ -7,12 +7,13 @@ import "../src/ImpactManager.sol";
 contract ImpactManagerScript is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        address deployer = vm.envAddress("PUBLIC_KEY");
+
         vm.startBroadcast(deployerPrivateKey);
 
         ImpactManager im = new ImpactManager();
 
-        im.mint(address(this), 1000000 ether);
-        im.donate(100000 ether);
+        im.mint(deployer, 1000000 ether);
 
         IImpactManager.CreateProjectDto memory p1 = IImpactManager
             .CreateProjectDto({
