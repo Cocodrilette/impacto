@@ -62,6 +62,11 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         uint256 projectId,
         uint256 compliance
     ) public onlyOwner {
+        require(
+            compliance >= 0 && compliance <= 100,
+            "Compliance must be between 0 and 100"
+        );
+
         Project storage project = projectById[projectId];
         project.currentMilestone += 1;
 
