@@ -17,7 +17,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
   return (
     <PrivyProvider
-      appId='your-privy-app-id'
+      appId='clwcrd9zx01ihbie8ucpa5dhc'
       config={{
         // Customize Privy's appearance in your app
         appearance: {
