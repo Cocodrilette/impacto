@@ -35,9 +35,9 @@ function TotalAllocation() {
   }, []);
 
   return (
-    <Card className="max-w-sm">
+    <Card className="allocation w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Total allocation</CardTitle>
+        <CardTitle >Total allocation</CardTitle>
       </CardHeader>
       <CardContent>
         <strong>

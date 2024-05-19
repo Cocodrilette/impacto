@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
-import { Toaster } from "react-hot-toast";
 
 import { cn } from "@/lib/utils";
 
@@ -11,6 +10,7 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 import Providers from "./providers";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,7 +31,9 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+        <Toaster />
+          {children}</Providers>
       </body>
     </html>
   );
