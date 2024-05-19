@@ -93,7 +93,7 @@ $$\[ A(t, n) = S(n-1) + \left( \frac{t - t_{\text{prev}}}{P_n} \right) \times (S
 $$
 
 Donde:
-- $`\ t_{\text{prev}} =  \sum_{k=1}^{n-1} P_k \ `$ es el tiempo total hasta el final del periodo anterior.
+- $`\ t_{\text{prev}}`$ = ${\sum}_{k=1}^{n-1} P_k$  es el tiempo total hasta el final del periodo anterior.
 - $`\ P_n `$ es la duración del periodo $`\ n `$.
 <h2>Despliegue de la subnet impactNetwork</h2>
 
