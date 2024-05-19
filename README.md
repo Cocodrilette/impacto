@@ -1,1 +1,2 @@
-# impacto
+<h1>Impacto app <img href="./front/public/impacto-logo.png"/></h1>
+<p>Impacto app es una plataforma que permite el financiamiento y apoyo a proyectos de bien público. <i>Somos la solución definitiva a Gitcoin</i>.</p>
