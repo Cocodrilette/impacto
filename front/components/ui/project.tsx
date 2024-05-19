@@ -13,27 +13,17 @@ export function Project({
 }) {
   return (
     <div className="flex gap-2 p-2">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center justify-center gap-5">
         <h1 className="font-semibold text-center text-2xl mb-5">{title}</h1>
         <img
           src={imageUrl}
           alt={title}
           className="aspect-auto rounded-md shadow-md"
         />
+        <button className="bg-black text-white rounded-md p-2 m-auto">
+          See details
+        </button>
       </div>
-      {/* <div className="flex flex-col items-start justify-center">
-        <p>{description}</p>
-        <div className="flex flex-row gap-2">
-          <p>
-            <strong>Required funds: </strong>
-            {requiredFunds}
-          </p>
-          <p>
-            <strong>Collected funds: </strong>
-            {collectedFunds}
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 }
