@@ -17,11 +17,23 @@
     <p><b>Algunas plataformas muy famosas que luchan contra estas problemáticas son:</b></p>
     <img src="./front/public/cases.png">
 </div>
-<div>
+<div id="the-solution">
     <h2>
         La solución: Impacto <img src="./front/public/impacto-logo.png" height="60" />
     </h2>
     <p>
-        Evaluamos las problemáticas antes mencionadas.
+        Impacto es una plataforma que no depende del financiamiento directo a proyectos por parte de AvaLabs, a través de nuestra aplicación, los proyectos podrán obtener financiamiento de patrocinadores o retailers, esta es una enorme ventaja a nivel de proponente ya que permitirá la expansión y fidelización de la marca. Nuestra propuesta de valor es:
     </p>
+    <ol>
+        <li>
+            <b>Curación y clasificación de proyectos:</b> Con el fin de enlistar proyectos que no cumplan con los requisitos mínimos, generaremos un primer filtro para validar que los propuestas cumplan con dichos requisimos. Este será un proceso llevado a cabo por los curadores que formen parte del equipo de Impacto, será documentada e informada a toda la comunidad y proponentes sin cabida a dudas.
+        </li><br>
+        <li>
+            <b>Seguimiento de las propuestas:</b> ¡No más a proyectos que proponen, obtienen fondos y no cumplen su propuesta! Principalmente, Impacto nace con esta motivación principal de evaluar el cumplimiento de lo propuesto. Esto se llevará a cabo por un modelo basado en Tiers (períodos) que tendrá una temporalidad, hitos y puntos a evaluar predefinidos a la propuesta.
+        </li><br>
+        <li>
+            <b>Nivelación en las votaciones:</b> Finalmente, llegamos a la conclusión que una sola persona no debería ser capaz de tener un peso de voto tan grande como sucede en algunas plataformas de financiamiento donde el dinero es la piedra angular, o en otros casos, donde por más tiempo que hayas invertido apoyando a una comunidad tu peso de voto es el mismo al de una persona que recién ingresa.
+        </li>
+    </ol>
+    <p>Impacto plantea estas soluciones para permitir un financiamiento más justo, amplio y estratégico a las propuestas de los proyectos o comunidades.</p>
 </div>
