@@ -1,7 +1,7 @@
 'use client';
 
 import { useReadContract } from 'wagmi';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -13,32 +13,39 @@ import { motion, animate, useMotionValue, useTransform } from 'framer-motion';
 import { abi as impactManagerAbi } from '@/constants/abi/impact-manager';
 import { ImpactManagerAddress } from '@/constants';
 import { formatUnits } from 'viem';
+import { calculateAllocation } from '@/function/calculateAllocation';
 
 function TotalAllocation() {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, Math.round);
+  const [initialValues, setInitialValues] = useState(null);
+  const [allocation, setAllocation] = useState('0');
   const { data, refetch, error, isFetched } = useReadContract({
     abi: impactManagerAbi,
     address: ImpactManagerAddress,
-    functionName: 'balanceOf',
-    args: [ImpactManagerAddress],
+    functionName: 'getAllocation',
+    args: [0, 2],
   });
 
-  useEffect(() => {
-    const animation = animate(count, 100000, { duration: 1 });
-    return animation.stop;
-  }, []);
+
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.debug('data', data);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 10 * 1000);
-    return () => clearInterval(interval);
-  }, []);
+  }, [isFetched]);
+
+  useEffect(()=>{
+    if (!initialValues) return;
+    const updateAllocation = () => {
+      const t = Math.floor(Date.now() / 1000);  // Current time in seconds
+      const newAllocation = calculateAllocation(t, initialValues, 1);
+      setAllocation(newAllocation.toFixed(2));  // Adjust as needed
+  };
+
+
+  const intervalId = setInterval(updateAllocation, 1000);
+  return () => clearInterval(intervalId);
+
+
+  }, [initialValues]);
 
   return (
     <Card className='allocation w-full'>
@@ -49,7 +56,7 @@ function TotalAllocation() {
         <strong>
           $
           <motion.span className='text-2xl font-bold'>
-            {typeof data === 'bigint' ? formatUnits(data, 18) : '0'}
+           {allocation}
           </motion.span>{' '}
           USD{' '}
         </strong>
