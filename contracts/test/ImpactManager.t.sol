@@ -118,8 +118,6 @@ contract ImpactManagerTest is Test {
         vm.prank(owner);
         im.approveProject(PROJECT_ID);
 
-        vm.prank(owner);
-        im.approveMilestone(PROJECT_ID, 100);
         
 
         vm.warp(block.timestamp + 1 days * 30 * 1);
@@ -129,8 +127,20 @@ contract ImpactManagerTest is Test {
         allocation = im.getAllocation(PROJECT_ID, 1);
         assert(allocation == 10e18);
 
-    }
+        vm.prank(owner);
+        im.approveMilestone(PROJECT_ID, 100);
+        vm.warp(block.timestamp + 1 days * 30 * 2);
+        allocation = im.getAllocation(PROJECT_ID, 2);
+        assert(allocation == 37e18);
+         vm.prank(owner);
+        im.approveMilestone(PROJECT_ID, 100);
+        vm.warp(block.timestamp + 1 days * 30 * 2);
+        allocation = im.getAllocation(PROJECT_ID, 3);
+        assert(allocation == 100e18);
 
+
+
+    }
     function __mint__(address to, uint256 amount) public {
         vm.prank(owner);
         im.mint(to, amount);
