@@ -5,13 +5,15 @@ import { motion, animate, useMotionValue, useTransform } from 'framer-motion';
 
 function CurrentAllocation() {
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const rounded = useTransform(count, Math.round);
+
 
   useEffect(() => {
-    const controls = animate(count, 100);
+    const animation = animate(count, 100, { duration: 1 });
 
-    return () => controls.stop();
+    return animation.stop;
   }, []);
+
   return (
     <Card>
       <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
@@ -32,7 +34,11 @@ function CurrentAllocation() {
         </svg>
       </CardHeader>
       <CardContent>
-        <motion.div className='text-2xl font-bold'>${rounded}</motion.div>
+        <strong>
+          $
+        <motion.span className='text-2xl font-bold'>{rounded}</motion.span>
+        {' '} USD 
+          </strong>
       </CardContent>
     </Card>
   );

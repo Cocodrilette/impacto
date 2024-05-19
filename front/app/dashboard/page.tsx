@@ -41,13 +41,16 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  TooltipProvider
 } from '@/components/ui/tooltip';
 import TotalAllocation from '@/components/TotalAllocation';
 import CurrentAllocation from '@/components/CurrentAllocation';
 
-export function Dashboard() {
+function Dashboard() {
   return (
+      <TooltipProvider>
     <div className='grid h-screen w-full pl-[56px]'>
+
       <aside className='inset-y fixed  left-0 z-20 flex h-full flex-col border-r'>
         <div className='border-b p-2'>
           <Button variant='outline' size='icon' aria-label='Home'>
@@ -301,5 +304,8 @@ export function Dashboard() {
         </main>
       </div>
     </div>
+    </TooltipProvider>
   );
 }
+
+export default Dashboard;

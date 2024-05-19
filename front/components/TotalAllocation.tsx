@@ -5,17 +5,21 @@ import { motion, animate, useMotionValue, useTransform } from 'framer-motion';
 
 function TotalAllocation() {
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const rounded = useTransform(count, Math.round);
+
 
   useEffect(() => {
-    const controls = animate(count, 100);
+    const animation = animate(count, 100000, { duration: 1 });
 
-    return () => controls.stop();
+    return animation.stop;
   }, []);
+
   return (
     <Card>
       <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='text-sm font-medium'>Total Allocation</CardTitle>
+        <CardTitle className='text-sm font-medium'>
+          Current allocation
+        </CardTitle>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 24 24'
@@ -30,7 +34,10 @@ function TotalAllocation() {
         </svg>
       </CardHeader>
       <CardContent>
-        <motion.div className='text-2xl font-bold'>${rounded}</motion.div>
+      <strong>
+          $
+        <motion.span className='text-2xl font-bold'>{rounded}</motion.span>
+          {' '} USD </strong>
       </CardContent>
     </Card>
   );
