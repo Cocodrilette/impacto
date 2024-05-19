@@ -25,7 +25,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         appearance: {
           theme: "light",
           accentColor: "#676FFF",
-          logo: "https://your-logo-url",
+          logo: "https://ylozndsochkkfwjujmtk.supabase.co/storage/v1/object/public/Impacto%20logo/impacto-logo.png?t=2024-05-19T19%3A49%3A27.925Z",
         },
         // Create embedded wallets for users who don't have a wallet
         embeddedWallets: {
