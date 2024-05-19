@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: NO LICENSE
-pragma solidity 0.8.20;
+pragma solidity 0.8.19;
 
 import "./IImpactManager.sol";
 import "./Access/Ownable.sol";

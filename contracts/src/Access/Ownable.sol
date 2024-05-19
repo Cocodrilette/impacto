@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: NO LICENSE
-pragma solidity 0.8.20;
+pragma solidity ^0.8.19;
 
 contract Ownable {
     address private _owner;

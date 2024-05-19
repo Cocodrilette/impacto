@@ -17,7 +17,7 @@ function deploy_local() {
 }
 
 function deploy_testnet() {
-    forge script script/ImpactManager.s.sol:ImpactManagerScript --rpc-url $AVALANCHE_RPC_URL --broadcast --verify -vvvv
+    forge script script/ImpactManager.s.sol:ImpactManagerScript --rpc-url $AVALANCHE_RPC_URL --broadcast -vvvv --verifier-url 'https://api.routescan.io/v2/network/testnet/evm/43113/etherscan' --etherscan-api-key "verifyContract"
 }
 
 case "$network" in "local")
