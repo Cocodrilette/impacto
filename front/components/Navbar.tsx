@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { HandCoins, Landmark, LayoutDashboard, Sprout } from "lucide-react";
 import Image from "next/image";
 import ImpactoLogo from "../public/impacto-logo.png";
-import { RxDotFilled } from "react-icons/rx";
+import { Dot } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -66,7 +66,7 @@ function Navbar({ children }: { children: React.ReactNode }) {
           <header className="sticky top-0 z-10 flex h-[57px] justify-between items-center gap-1 border-b bg-background px-4">
             <h1 className="text-xl font-semibold">Impacto</h1>
             <div className="flex items-center justify-center text-sm text-gray-300 gap-2 py-1 px-2 border rounded-md">
-              <RxDotFilled className="m-auto text-green-400 animate-pulse" />
+              <Dot className="m-auto text-green-400 animate-pulse" />
               Total value allocated{" "}
               <strong>
                 {typeof data === "bigint" ? formatEther(data) : "0"} USD
