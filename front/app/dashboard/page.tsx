@@ -8,17 +8,19 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import TotalAllocation from "@/components/TotalAllocation";
-import CurrentAllocation from "@/components/CurrentAllocation";
 import { DonateForm } from "@/components/ui/donate-form";
+import Image from "next/image";
+
+import ImpactoLogo from "../../public/impacto-logo.png";
 
 function Dashboard() {
   return (
     <TooltipProvider>
       <div className="grid h-screen w-full pl-[56px]">
         <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
-          <div className="border-b p-2">
-            <Button variant="outline" size="icon" aria-label="Home">
-              <Triangle className="size-5 fill-foreground" />
+          <div className="flex items-center justify-center border-b p-2">
+            <Button variant="link" size="icon" aria-label="Home">
+              <Image src={ImpactoLogo} height={30} alt="Logo de Impacto" />
             </Button>
           </div>
           <nav className="grid gap-1 p-2">
