@@ -1,11 +1,23 @@
 'use client';
 
-import {PrivyProvider} from '@privy-io/react-auth';
+import { PrivyProvider } from '@privy-io/react-auth';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createConfig } from '@privy-io/wagmi';
+import { avalancheFuji } from 'viem/chains';
+import { WagmiProvider } from '@privy-io/wagmi';
+import { http } from 'wagmi';
 
-export default function Providers({children}: {children: React.ReactNode}) {
+export const config = createConfig({
+  chains: [avalancheFuji], // Pass your required chains as an array
+  transports: {
+    [avalancheFuji.id]: http(),
+  },
+});
+export default function Providers({ children }: { children: React.ReactNode }) {
+  const queryClient = new QueryClient();
   return (
     <PrivyProvider
-      appId="your-privy-app-id"
+      appId='clwcrd9zx01ihbie8ucpa5dhc'
       config={{
         // Customize Privy's appearance in your app
         appearance: {
@@ -19,7 +31,9 @@ export default function Providers({children}: {children: React.ReactNode}) {
         },
       }}
     >
-      {children}
+      <QueryClientProvider client={queryClient}>
+        <WagmiProvider config={config}>{children}</WagmiProvider>
+      </QueryClientProvider>
     </PrivyProvider>
   );
 }
