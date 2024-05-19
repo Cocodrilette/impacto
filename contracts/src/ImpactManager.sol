@@ -68,11 +68,11 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         );
 
         Project storage project = projectById[projectId];
-        project.currentMilestone += 1;
-
         Milestone storage milestone = milestonesByProjectId[projectId][
             project.currentMilestone
         ];
+
+        project.currentMilestone += 1;
         milestone.compliance = compliance;
 
         emit MilestoneApproved(projectId, compliance);
@@ -145,7 +145,6 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
             name: "Validacion inicial",
             description: "El proyecto demuestra ser viable y las personas involucradas tienen la capacidad de llevarlo a cabo.",
             weight: 10,
-            // Compliance should be 100 as default
             compliance: 100
         });
         milestones[1] = Milestone({

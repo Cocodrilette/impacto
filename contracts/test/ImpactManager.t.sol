@@ -57,12 +57,43 @@ contract ImpactManagerTest is Test {
             });
 
         im.propose(dto);
-        vm.prank(owner);
-        im.approveProject(0);
 
-        IImpactManager.Project memory project = im.getProjectById(0);
+        uint256 PROJECT_ID = 0;
+
+        vm.prank(owner);
+        im.approveProject(PROJECT_ID);
+
+        IImpactManager.Project memory project = im.getProjectById(PROJECT_ID);
         assertEq(project.approved, true);
         assertEq(project.starttime, block.timestamp);
+    }
+
+    function test_approveMilestone() public {
+        IImpactManager.CreateProjectDto memory dto = IImpactManager
+            .CreateProjectDto({
+                name: "Project 1",
+                description: "Description",
+                lifetime: 100,
+                target: 100,
+                owner: user1
+            });
+
+        im.propose(dto);
+
+        uint256 PROJECT_ID = 0;
+
+        vm.prank(owner);
+        im.approveProject(PROJECT_ID);
+
+        vm.prank(owner);
+        im.approveMilestone(PROJECT_ID, 100);
+
+        IImpactManager.Project memory project = im.getProjectById(PROJECT_ID);
+        IImpactManager.Milestone[] memory milestones = im
+            .getMilestonesByProjectId(PROJECT_ID);
+
+        assertEq(project.currentMilestone, 1);
+        assertEq(milestones[0].compliance, 100);
     }
 
     function __mint__(address to, uint256 amount) public {
