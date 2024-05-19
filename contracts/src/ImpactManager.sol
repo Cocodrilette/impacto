@@ -117,13 +117,12 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         uint256 I = milestonesByProjectId[_projectId].length;
         uint256 t = (block.timestamp - project.starttime );
         uint256 Pk = ((project.lifetime / I) * (n - 1));
-        uint256 Pn = ((project.lifetime / I) * n);
+        uint256 Pn = ((project.lifetime / I) * n ) -Pk;
         uint256 SCALAR = 1e18;
         uint256 numerator = (t - Pk) * SCALAR;
         uint256 denominator = Pn;
 
         uint256 scaledValue = numerator / denominator;
-
         return
              _getLinearReputationBasedAllocation(n - 1, _projectId) +
             (scaledValue *
@@ -165,8 +164,8 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
             compliance >= 0 && compliance <= 100,
             "Compliance must be between 0 and 100"
         );
-
         Project storage project = projectById[projectId];
+        console2.log("Current milestone ",project.currentMilestone);
         Milestone storage milestone = milestonesByProjectId[projectId][
             project.currentMilestone
         ];
@@ -185,17 +184,14 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
 
         Project storage project = projectById[_projectId];
         Milestone[] storage milestones = milestonesByProjectId[_projectId];
-        Milestone storage milestone = milestones[n - 1];
-        console2.log("Weight ",milestone.weight);
-        uint256 T1 = (project.target * milestone.weight) / 100;
+        uint256 T1 = (project.target * milestones[0].weight) / 100;
         if (n == 1) return T1;
 
         uint256 _reputationIndex = 0;
 
-        for (uint256 i = 0; i < n - 1; i++) {
+        for (uint256 i = 0; i <= n - 1 ; i++) {
             _reputationIndex += milestones[i].weight * milestones[i].compliance;
         }
-
-        return T1 + (_reputationIndex * (project.target - T1)) / 100;
+        return T1 + (_reputationIndex/100 * (project.target - T1)) / 100;
     }
 }
