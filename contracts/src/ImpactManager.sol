@@ -55,6 +55,7 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         project.approved = true;
         project.starttime = block.timestamp;
 
+        _approveMilestone(projectId, 100);
         emit ProjectApproved(projectId);
     }
 
@@ -62,6 +63,10 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         uint256 projectId,
         uint256 compliance
     ) public onlyOwner {
+        _approveMilestone(projectId, compliance);
+    }
+
+    function _approveMilestone(uint256 projectId, uint256 compliance) internal {
         require(
             compliance >= 0 && compliance <= 100,
             "Compliance must be between 0 and 100"

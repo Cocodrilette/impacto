@@ -64,8 +64,13 @@ contract ImpactManagerTest is Test {
         im.approveProject(PROJECT_ID);
 
         IImpactManager.Project memory project = im.getProjectById(PROJECT_ID);
+        IImpactManager.Milestone[] memory milestones = im
+            .getMilestonesByProjectId(PROJECT_ID);
+
         assertEq(project.approved, true);
+        assertEq(project.currentMilestone, 1);
         assertEq(project.starttime, block.timestamp);
+        assertEq(milestones[0].compliance, 100);
     }
 
     function test_approveMilestone() public {
@@ -92,8 +97,8 @@ contract ImpactManagerTest is Test {
         IImpactManager.Milestone[] memory milestones = im
             .getMilestonesByProjectId(PROJECT_ID);
 
-        assertEq(project.currentMilestone, 1);
-        assertEq(milestones[0].compliance, 100);
+        assertEq(project.currentMilestone, 2);
+        assertEq(milestones[1].compliance, 100);
     }
 
     function __mint__(address to, uint256 amount) public {
