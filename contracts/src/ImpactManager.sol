@@ -66,23 +66,6 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         _approveMilestone(projectId, compliance);
     }
 
-    function _approveMilestone(uint256 projectId, uint256 compliance) internal {
-        require(
-            compliance >= 0 && compliance <= 100,
-            "Compliance must be between 0 and 100"
-        );
-
-        Project storage project = projectById[projectId];
-        Milestone storage milestone = milestonesByProjectId[projectId][
-            project.currentMilestone
-        ];
-
-        project.currentMilestone += 1;
-        milestone.compliance = compliance;
-
-        emit MilestoneApproved(projectId, compliance);
-    }
-
     function getProjects() public view returns (Project[] memory) {
         return projects;
     }
@@ -166,6 +149,23 @@ contract ImpactManager is IImpactManager, Ownable, ERC20 {
         });
 
         return milestones;
+    }
+
+    function _approveMilestone(uint256 projectId, uint256 compliance) internal {
+        require(
+            compliance >= 0 && compliance <= 100,
+            "Compliance must be between 0 and 100"
+        );
+
+        Project storage project = projectById[projectId];
+        Milestone storage milestone = milestonesByProjectId[projectId][
+            project.currentMilestone
+        ];
+
+        project.currentMilestone += 1;
+        milestone.compliance = compliance;
+
+        emit MilestoneApproved(projectId, compliance);
     }
 
     function _getLinearReputationBasedAllocation(
