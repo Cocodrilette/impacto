@@ -4,27 +4,15 @@ import { useWriteContract } from 'wagmi';
 import { abi } from '@/constants/abi/impact-manager';
 import { ImpactManagerAddress } from '@/constants';
 import { parseUnits } from 'viem';
+import { DonateForm } from '@/components/ui/donate-form';
 function Donate() {
   const [amount, setAmount] = useState<null | string>(null);
   const { writeContract } = useWriteContract();
 
   return (
-    <div>
-      donate
-      <input type='text' onChange={(e) => setAmount(e.target.value)} />
-      <button
-        onClick={() =>
-          writeContract({
-            abi,
-            address: ImpactManagerAddress,
-            functionName: 'donate',
-            args: [parseUnits(amount || '0', 18)],
-          })
-        }
-      >
-        ClickMe
-      </button>
-    </div>
+    <main className='p-6 flex justify-center '>
+      <DonateForm />
+    </main>
   );
 }
 

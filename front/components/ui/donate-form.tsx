@@ -1,13 +1,15 @@
 'use client';
 
 import { useAccount, useReadContract, useWriteContract } from 'wagmi';
-import { Card } from './card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './card';
 import { usePrivy } from '@privy-io/react-auth';
 import { abi } from '@/constants/abi/impact-manager';
 import { ImpactManagerAddress } from '@/constants';
 import { formatEther, parseUnits } from 'viem';
 import { useEffect } from 'react';
 import { useToast } from './use-toast';
+import { Button } from './button';
+import { Input } from './input';
 
 export function DonateForm() {
   const { address } = useAccount();
@@ -64,35 +66,38 @@ export function DonateForm() {
   }, [isSuccess, isError]);
 
   return (
-    <Card className='donate flex flex-col gap-2 p-2 w-full'>
-      <div>
-        <label htmlFor='amount' className='text-sm font-medium'>
-          Amount
-        </label>
-        <input
+    <Card className='donate w-full'>
+      <CardHeader>
+        <CardTitle>
+          Donate
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Input
           disabled={!address}
           id='amount'
-          type='number'
-          className='w-full p-2 border rounded-md'
+          className='w-full'
         />
         <p className='text-xs text-gray-400 mt-1'>
           {data
             ? `Available: ${typeof data === 'bigint' ? formatEther(data) : '0'}`
             : 'Loading...'}
         </p>
-      </div>
-      <button
-        onClick={() => {
-          if (address) {
-            handleDonate();
-          } else {
-            connectWallet();
-          }
-        }}
-        className='w-full p-2 bg-primary text-white rounded-md'
-      >
-        {address ? 'Donate' : 'Connect Wallet'}
-      </button>
+      </CardContent>
+      <CardFooter>
+        <Button
+        className='w-full font-bold'
+          onClick={() => {
+            if (address) {
+              handleDonate();
+            } else {
+              connectWallet();
+            }
+          }}
+        >
+          {address ? 'Donate' : 'Connect Wallet'}
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

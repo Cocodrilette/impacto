@@ -40,7 +40,7 @@ function GrowthChart() {
       </CardHeader>
       <CardContent>
         <div className='w-full h-full p-4'>
-          <AreaChart width={730} height={260} data={data}>
+          <AreaChart width={730} height={300} data={data}>
             <defs>
               <linearGradient id='colorUv' x1='0' y1='0' x2='0' y2='1'>
                 <stop offset='5%' stopColor='#8884d8' stopOpacity={0.8} />
