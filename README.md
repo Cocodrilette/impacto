@@ -35,7 +35,10 @@
             <b>Seguimiento de las propuestas:</b> ¡No más a proyectos que proponen, obtienen fondos y no cumplen su propuesta! Principalmente, Impacto nace con esta motivación principal de evaluar el cumplimiento de lo propuesto. Esto se llevará a cabo por un modelo basado en Tiers (períodos) que tendrá una temporalidad, hitos y puntos a evaluar predefinidos a la propuesta.
         </li><br>
         <li>
-            <b>Nivelación en las votaciones:</b> Finalmente, llegamos a la conclusión que una sola persona no debería ser capaz de tener un peso de voto tan grande como sucede en algunas plataformas de financiamiento donde el dinero es la piedra angular, o en otros casos, donde por más tiempo que hayas invertido apoyando a una comunidad tu peso de voto es el mismo al de una persona que recién ingresa.
+            <b>Nivelación en las votaciones:</b> Llegamos a la conclusión que una sola persona no debería ser capaz de tener un peso de voto tan grande como sucede en algunas plataformas de financiamiento donde el dinero es la piedra angular, o en otros casos, donde por más tiempo que hayas invertido apoyando a una comunidad tu peso de voto es el mismo al de una persona que recién ingresa.
+        </li><br>
+        <li>
+            <b>Poco financiamiento para proyectos:</b> Finalmente, creación de un protocolo que otorgue espacio para la financianción de proyectos en etapa temprana que nutran la variedad de comunidades y proyectos dentro del ecosistema de Avalanche, abriendo la posibilidad de financiar bienes públicos. Quitando la dependencia de búsqueda de capital en Ava Labs y VCs.
         </li>
     </ol>
     <img src="./front/public/what-is-impacto.png">
@@ -65,3 +68,68 @@
 <img src="./front/public/bussiness-model.png">
 <h2>Roadmap</h2>
 <img src="./front/public/roadmap.png">
+<h2>Despliegue de la subnet impactNetwork</h2>
+
+```bash:
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s && export PATH=~/bin:$PATH >> .bashrc && avalanche subnet deploy impactNetwork && avalanche subnet deploy impactNetwork
+```
+<p>Este fue nuestro output:</p>
+
+```bash:
+avalanche subnet create impactNetwork
+✔ Subnet-EVM
+✔ Use latest release version
+✔ Yes
+✔ Yes
+Installing subnet-evm-v0.6.4...
+subnet-evm-v0.6.4 installation successful
+creating genesis for subnet impactNetwork
+Enter your subnet's ChainId. It can be any positive integer.
+ChainId: 69
+Select a symbol for your subnet's native token
+Token symbol: IMPK
+✔ Low disk use    / Low Throughput    1.5 mil gas/s (C-Chain's setting)
+✔ Customize your airdrop
+Address to airdrop to: 0xD49f3059040A55B912eb293C9C5Dd19e308883EA
+Amount to airdrop (in IMPK units): 10000000000000000000000000
+✔ Yes
+Address to airdrop to: 0xD49f3059040A55B912eb293C9C5Dd19e308883EA
+✔ Amount to airdrop (in IMPK units): 10000000000000000000000000█
+✔ No
+✔ No
+✓ Successfully created subnet configuration
+```
+<p>Los datos de nuestra red son estos:</p>
+
+```bash:
+avalanche network status
+Network is Up:
+  Number of Nodes: 5
+  Number of Custom VMs: 1
+  Network Healthy: true
+  Custom VMs Healthy: true
+
++------------------------+-------------------------------------------------------------------------------------+
+|                                            impactNetwork RPC URLs                                            |
++------------------------+-------------------------------------------------------------------------------------+
+| Localhost              | http://127.0.0.1:9650/ext/bc/impactNetwork/rpc                                      |
++                        +-------------------------------------------------------------------------------------+
+|                        | http://127.0.0.1:9650/ext/bc/2msggVQf2hv2XY8cJcoNmgeVLSEcr7xxaGDiwiKhJAt6M1vTwg/rpc |
++------------------------+-------------------------------------------------------------------------------------+
+
++-------+------------------------------------------+-----------------------+
+|                                  Nodes                                   |
++-------+------------------------------------------+-----------------------+
+| Name  | Node ID                                  | Localhost Endpoint    |
++-------+------------------------------------------+-----------------------+
+| node1 | NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg | http://127.0.0.1:9650 |
++-------+------------------------------------------+-----------------------+
+| node2 | NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ | http://127.0.0.1:9652 |
++-------+------------------------------------------+-----------------------+
+| node3 | NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN | http://127.0.0.1:9654 |
++-------+------------------------------------------+-----------------------+
+| node4 | NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu | http://127.0.0.1:9656 |
++-------+------------------------------------------+-----------------------+
+| node5 | NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 | http://127.0.0.1:9658 |
++-------+------------------------------------------+-----------------------+
+```
