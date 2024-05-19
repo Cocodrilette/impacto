@@ -35,5 +35,26 @@
             <b>Nivelación en las votaciones:</b> Finalmente, llegamos a la conclusión que una sola persona no debería ser capaz de tener un peso de voto tan grande como sucede en algunas plataformas de financiamiento donde el dinero es la piedra angular, o en otros casos, donde por más tiempo que hayas invertido apoyando a una comunidad tu peso de voto es el mismo al de una persona que recién ingresa.
         </li>
     </ol>
+    <img src="./front/public/what-is-impacto.png">
     <p>Impacto plantea estas soluciones para permitir un financiamiento más justo, amplio y estratégico a las propuestas de los proyectos o comunidades.</p>
+</div>
+<div id="select-project-model">
+    <h2>
+        Impacto: Modelo de selección de proyectos
+    </h2>
+    <p>
+        Identificamos tres criterios de evaluación que nos permitirá observar los proyectos desde tres puntos vitales, cada uno aportando un peso y valor significativo diferente a la selección de los mismos:
+    </p>
+    <ol>
+        <li>
+            <b>Votación general:</b> Cada miembro de la comunidad podrá votar a favor o no de una propuesta, esto permitirá que colectivamente se decida si un proyecto podrá ser enlistado para recibir financiamiento o no. Este criterio de evaluación recibe un peso de 2/3 puntos. 
+        </li><br>
+        <li>
+            <b>Actividades on-chain:</b> Este es el criterio menos manipulable y con menos probabilidad de falsificación. En este punto evaluamos que tanta actividad, contribuciones, acciones y demás han tenido los proponentes/votantes en la cadena de bloques. Tiene un peso de 3/3 puntos.
+        </li><br>
+        <li>
+            <b>Evaluación técnica:</b> Este es el criterio con menos peso ya que se trata de un modelo técnicamente central. Acá, realizamos un filtro a las propuestas iniciales y revisamos si cumple con los criterios mínimos, en caso que sí, generamos una puntuación. Este criterio tiene un peso de 1/3 puntos.
+        </li>
+    </ol>
+    <img src="./front/public/criterios-de-evaluacion.png">
 </div>
