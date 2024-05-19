@@ -46,6 +46,25 @@ contract ImpactManagerTest is Test {
         assertEq(milestones.length, 3);
     }
 
+    function test_approveProject() public {
+        IImpactManager.CreateProjectDto memory dto = IImpactManager
+            .CreateProjectDto({
+                name: "Project 1",
+                description: "Description",
+                lifetime: 100,
+                target: 100,
+                owner: user1
+            });
+
+        im.propose(dto);
+        vm.prank(owner);
+        im.approveProject(0);
+
+        IImpactManager.Project memory project = im.getProjectById(0);
+        assertEq(project.approved, true);
+        assertEq(project.starttime, block.timestamp);
+    }
+
     function __mint__(address to, uint256 amount) public {
         vm.prank(owner);
         im.mint(to, amount);
